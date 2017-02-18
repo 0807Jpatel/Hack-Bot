@@ -1,0 +1,9 @@
+#!/bin/bash
+
+git fetch hackalist
+git diff HEAD hackalist/master api/1.0/2017
+
+if ($==1)
+echo "changed"	
+
+fi
