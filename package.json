@@ -1,0 +1,26 @@
+{
+  "name": "hack-bot",
+  "version": "1.0.0",
+  "description": "Track hackathons using facebook messenger.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0807Jpatel/Hack-Bot.git"
+  },
+  "keywords": [
+    "Messenger",
+    "Bot",
+    "Facebook",
+    "Hackathon",
+    "Nodejs"
+  ],
+  "author": "Arslan, Jay, Varun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0807Jpatel/Hack-Bot/issues"
+  },
+  "homepage": "https://github.com/0807Jpatel/Hack-Bot#readme"
+}
