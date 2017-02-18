@@ -31,7 +31,8 @@ app.post('/webhook', function(req, res){
         let sender = event.sender.id;
 	if(event.message && event.message.text){
 		let text = event.message.text;
-		if(text == "Upcoming Hackathons"){
+		if(text == "help"){
+			sendText(sender,"");
 
 		}else if(text == "Hackathons in "){
 
@@ -46,7 +47,28 @@ app.post('/webhook', function(req, res){
 	
     }
 });
+function sendMD(sender, messageData){
+    request({
+        url: "https://graph.facebook.com/v2.6/me/messages",
+        qs: {access_token: token},
+        method: "POST",
+        json: {
+            recipient: {id: sender},
+            message: messageData
+        }
+    }, function(error, response, body){
+        if(error){
+            console.log("sending error");
+        }else if(response.body.error){
+            console.log('response body error');
+        }
+    })
+}
 
+function sendText(sender, text){
+    let messageData = {text: text};
+    sendMD(sender, messageData);
+};
 
 
 
