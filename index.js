@@ -21,12 +21,12 @@ app.get('/webhook', function(req, res){
     if(req.query['hub.verify_token'] == "seawolf123"){
         res.send(req.query['hub.challenge']);
     }
-    res.send{"wrong token");
+    res.send("wrong token");
 });
 
 app.post('/webhook', function(req, res){
     let message_events = req.body.entry[0].messaging;
-    for(let 1 = 0; i < message_events.length; i++){
+    for(let i = 0; i < message_events.length; i++){
 	let event = message_events[i];
         let sender = event.sender.id;
 	if(event.message && event.message.text){
@@ -35,11 +35,13 @@ app.post('/webhook', function(req, res){
 
 		}else if(text == "Hackathons in "){
 
-		}else if{ text == "Hackathon this months"){
+		}else if( text == "Hackathon this months"){
 
 		}else{
 
 		}
+	}else{
+
 	}
 	
     }
