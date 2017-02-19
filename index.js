@@ -94,7 +94,7 @@ docClient.scan(params, function (err, data){
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
-                                "url": hackathon.url,
+                                "url": "https://goo.gl/CTU137",
                                 "messenger_extensions": true,
                                 "webview_height_ratio": "tall",
                                 "fallback_url": hackathon.facebookURL
