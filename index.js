@@ -105,7 +105,7 @@ docClient.scan(params, function (err, data){
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
-                                "url":  hackathon.link,
+                                "url":  "https://masseyhacks.ca/",
                                 "messenger_extensions": true,
                                 "webview_height_ratio": "tall",
                                 "fallback_url": hackathon.facebookURL
@@ -113,7 +113,7 @@ docClient.scan(params, function (err, data){
                             "buttons":[
                             { 
                                 "type":"web_url",
-                                "url": hackathon.link,
+                                "url": "https://masseyhacks.ca/",
                                 "title":"View Their Website"
                             }           
                         ]      
