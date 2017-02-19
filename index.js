@@ -36,12 +36,13 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
         if(event.message && event.message.text){
 		let text = event.message.text;
+            text = text.toLowerCase();
             if(text == "help"){
                 // sendText(sender, "hello");
                 sendHelpList(sender);
-            }else if(text == "Hackathons in "){
+            }else if(text == "hack month"){
 
-            }else if( text == "Hackathon this months"){
+            }else if( text == "upcoming hack"){
 
             }else{
 
