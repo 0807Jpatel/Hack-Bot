@@ -1,16 +1,23 @@
 'use strict'
 
+const AWS=require('aws-sdk');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+AWS.config.loadFromPath('./config.json');
+
+var exec = require('child_process').exec;
+
 
 const app = express();
-app.sets('port', (process.env.PORT || 5000));
-app.use(bodyParser.urlencoded({entended: true}));
+//app.sets('port', (process.env.PORT || 5000));
+var port = 9000;
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-let token = "some token";
+let token = "EAAabhSLUXDIBAFubWSmgkRwZCQwNRGXtR8ezZBgAZBZAD6aMAJ0RN7gZCIRwTqvVZCgEI3u4V6Ebm7rj2nfZAij6nlTr5i0WPhKSlj1FZCJKZAQ5z3ZAAHmVUzw52usJu8F9xnwcBawgEVADZCZAznEkE75VkdaI5L3CiEptFwZB4eZBIJRyOt2pYuMxFv";
+
 
 
 app.get('/', function(req, res){
@@ -47,6 +54,15 @@ app.post('/webhook', function(req, res){
 	
     }
 });
+
+function requestWebHook(){
+
+	console.log("entered");
+	exec("./webhook.sh", function(err, stdout, stderr){
+		console.log(err,stdout,stderr);
+	});
+	console.log("ASdfasdfasdf");
+}
 function sendMD(sender, messageData){
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
@@ -69,6 +85,9 @@ function sendText(sender, text){
     let messageData = {text: text};
     sendMD(sender, messageData);
 };
+
+app.listen(port);	
+requestWebHook();
 
 
 
