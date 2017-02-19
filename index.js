@@ -91,7 +91,7 @@ docClient.scan(params, function (err, data){
                             {
                             "title":hackathon.title,
                             // "image_url":hackathon.url,
-                            "subtitle":description,
+                            "subtitle":description
                             // "default_action": {
                             //     "type": "web_url",
                             //     "url": hackathon.url,
@@ -99,13 +99,13 @@ docClient.scan(params, function (err, data){
                             //     "webview_height_ratio": "tall",
                             //     "fallback_url": hackathon.facebookURL
                             //     },
-                            "buttons":[
-                            { 
-                                "type":"web_url",
-                                "url": hackathon.link,
-                                "title":"View Their Website"
-                            }           
-                        ]      
+                            // "buttons":[
+                            // { 
+                            //     "type":"web_url",
+                            //     "url": hackathon.link,
+                            //     "title":"View Their Website"
+                            // }           
+                        // ]      
                     }
                 ]
             }
