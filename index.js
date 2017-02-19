@@ -23,7 +23,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/webhook/', function(req, res){
-    if(req.query['hub.verify_token'] == "ReserveM#R00m"){
+    if(req.query['hub.verify_token'] == "seawolf123"){
         res.send(req.query['hub.challenge']);
     }
     res.send("Wrong Token");
