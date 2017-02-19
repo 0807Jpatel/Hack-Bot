@@ -94,6 +94,7 @@ docClient.scan(params, function (err, data){
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
+           var string = hackathon.link;
            let messagedata={
                 "attachment": {
                     "type": "template",
@@ -106,7 +107,7 @@ docClient.scan(params, function (err, data){
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
-                                "url":  hackathon.link,
+                                "url":  string,
                                 "messenger_extensions": true,
                                 "webview_height_ratio": "tall",
                                 "fallback_url": hackathon.facebookURL
@@ -114,7 +115,7 @@ docClient.scan(params, function (err, data){
                             "buttons":[
                             { 
                                 "type":"web_url",
-                                "url": hackathon.link,
+                                "url": string,
                                 "title":"View Their Website"
                             }           
                         ]      
