@@ -100,8 +100,6 @@ docClient.scan(params, function (err, data){
            webshot(hackathon.link, 'image.jpg', function(err) {
                 console.log("images saved");
             });
-
-           console.log(string);
            let messagedata={
                 "attachment": {
                     "type": "template",
