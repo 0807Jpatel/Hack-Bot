@@ -13,11 +13,11 @@ var feb = JSON.parse(fs.readFileSync('api/1.0/2017/02.json', 'utf8'));
 // var april = JSON.parse(fs.readFileSync('api/1.0/2017/04.json', 'utf8'));
 // var may = JSON.parse(fs.readFileSync('api/1.0/2017/05.json', 'utf8'));
 
-getMonth(jan);
+// getMonth(jan);
 getMonth(feb);
-getMonth(march);
-getMonth(april);
-getMonth(may);
+// getMonth(march);
+// getMonth(april);
+// getMonth(may);
 
 
 function getMonth(input){
