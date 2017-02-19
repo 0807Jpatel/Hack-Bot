@@ -85,7 +85,7 @@ docClient.scan(params, function (err, data){
             return;
         }
         if(counter > 5){
-            break;
+            return;
         }
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
