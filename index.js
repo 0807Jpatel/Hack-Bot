@@ -80,12 +80,14 @@ docClient.scan(params, function (err, data){
         var counter = 0;
         var ob = {"January": 1, "Febuary": 2, "March": 3, "April": 4, "May": 5, "June": 6, "July": 7, "August": 8, "Sepetember": 9, "October": 10, "November": 11, "December": 12};
         data.Items.forEach(function(hackathon) {
-        if(hackathon.startDate != " "){
+        console.log(hackathon.startDate);
+        if(hackathon.startDate != " " | hackathon.startDate != ""){
             var month = (hackathon.startDate.split(" "))[0];
             if(n != ob.month){
                 return;
             }
         }
+
         if(counter > 5){
             return;
         }
