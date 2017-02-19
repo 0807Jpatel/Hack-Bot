@@ -90,15 +90,15 @@ docClient.scan(params, function (err, data){
                         "elements":[
                             {
                             "title":hackathon.title,
-                            "image_url":hackathon.url,
+                            // "image_url":hackathon.url,
                             "subtitle":description,
-                            "default_action": {
-                                "type": "web_url",
-                                "url": hackathon.url,
-                                "messenger_extensions": true,
-                                "webview_height_ratio": "tall",
-                                "fallback_url": hackathon.facebookURL
-                                },
+                            // "default_action": {
+                            //     "type": "web_url",
+                            //     "url": hackathon.url,
+                            //     "messenger_extensions": true,
+                            //     "webview_height_ratio": "tall",
+                            //     "fallback_url": hackathon.facebookURL
+                            //     },
                             "buttons":[
                             { 
                                 "type":"web_url",
