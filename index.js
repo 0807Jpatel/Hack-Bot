@@ -104,7 +104,7 @@ docClient.scan(params, function (err, data){
                         "elements":[
                             {
                             "title":hackathon.title,
-                            // "image_url":hackathon.link,
+                            "image_url":hackathon.link,
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
