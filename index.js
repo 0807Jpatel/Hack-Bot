@@ -1,8 +1,13 @@
 'use strict'
 
+const AWS=require('aws-sdk');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+AWS.config.loadFromPath('./config.json');
+
+var exec = require('child_process').exec;
+
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -72,6 +77,15 @@ function sendMD(sender, messageData){
             console.log('response body error');
         }
     })
+}
+
+function requestWebHook(){
+
+    console.log("entered");
+    exec("./webhook.sh", function(err, stdout, stderr){
+        console.log(err,stdout,stderr);
+    });
+    console.log("ASdfasdfasdf");
 }
 
 function sendHelpList(sender){
