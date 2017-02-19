@@ -6,4 +6,3 @@ if [ "$DIFF" != "" ]
 then
     git checkout HackList/master api/1.0
 fi
-np
