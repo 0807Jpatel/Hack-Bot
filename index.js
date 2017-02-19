@@ -4,6 +4,8 @@ const AWS=require('aws-sdk');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+var webshot = require('webshot');
+
 AWS.config.loadFromPath('./config.json');
 
 var exec = require('child_process').exec;
@@ -94,7 +96,12 @@ docClient.scan(params, function (err, data){
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
-           var string = hackathon.link;
+           var image = 'image.jpg';
+           webshot(hackathon.link, 'image.jpg', function(err) {
+                console.log("images saved");
+            });
+        });
+
            console.log(string);
            let messagedata={
                 "attachment": {
@@ -104,7 +111,7 @@ docClient.scan(params, function (err, data){
                         "elements":[
                             {
                             "title":hackathon.title,
-                            "image_url":hackathon.link,
+                            "image_url": image,
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
