@@ -7,11 +7,11 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log("Importing movies into DynamoDB. Please wait.");
 
-var jan = JSON.parse(fs.readFileSync('api/1.0/2017/01.json', 'utf8'));
+// var jan = JSON.parse(fs.readFileSync('api/1.0/2017/01.json', 'utf8'));
 var feb = JSON.parse(fs.readFileSync('api/1.0/2017/02.json', 'utf8'));
-var march = JSON.parse(fs.readFileSync('api/1.0/2017/03.json', 'utf8'));
-var april = JSON.parse(fs.readFileSync('api/1.0/2017/04.json', 'utf8'));
-var may = JSON.parse(fs.readFileSync('api/1.0/2017/05.json', 'utf8'));
+// var march = JSON.parse(fs.readFileSync('api/1.0/2017/03.json', 'utf8'));
+// var april = JSON.parse(fs.readFileSync('api/1.0/2017/04.json', 'utf8'));
+// var may = JSON.parse(fs.readFileSync('api/1.0/2017/05.json', 'utf8'));
 
 getMonth(jan);
 getMonth(feb);

@@ -106,7 +106,7 @@ docClient.scan(params, function (err, data){
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
-                                "url":  hackathon.link,
+                                "url":  "https://goo.gl/w4Zkem",
                                 "messenger_extensions": true,
                                 "webview_height_ratio": "tall",
                                 "fallback_url": hackathon.facebookURL
@@ -114,7 +114,7 @@ docClient.scan(params, function (err, data){
                             "buttons":[
                             { 
                                 "type":"web_url",
-                                "url": hackathon.link,
+                                "url": "https://goo.gl/w4Zkem",
                                 "title":"View Their Website"
                             }           
                         ]      
