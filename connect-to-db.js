@@ -67,14 +67,13 @@ var params={
 
   Item:{
     "title": month.title,
-    "url": month.url,
+    "link": month.url,
     "startDate": month.startDate,
     "endDate": month.endDate,
-    "year": month.year,
+    "years": month.year,
     "city": month.city,
     "host": month.host,
-    "length": month.length,
-    "size": month.size,
+    "maxsize": month.size,
     "travel": month.travel,
     "prize": month.prize,
     "highSchoolers": month.highSchoolers,

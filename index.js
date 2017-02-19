@@ -7,7 +7,7 @@ const request = require('request');
 AWS.config.loadFromPath('./config.json');
 
 var exec = require('child_process').exec;
-
+var docClient = new AWS.DynamoDB.DocumentClient();
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -40,7 +40,8 @@ app.post('/webhook/', function(req, res){
             if(text == "help"){
                 // sendText(sender, "hello");
                 sendHelpList(sender);
-            }else if(text == "hack month"){
+            }else if(text == "Hackathons in "){
+                getUpcomingHackathons(sender);
 
             }else if( text == "upcoming hack"){
 
@@ -60,6 +61,78 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
+function getUpcomingHackathons(sender){
+
+var params = {
+    TableName: 'Hackathons',
+    ProjectionExpression: "years, title",
+    // Key:{
+    //     "title": title
+    // }
+};
+
+
+
+docClient.scan(params, function (err, data){
+
+ if (err) {
+        console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        // print all the movies
+        console.log("Scan succeeded.");
+        data.Items.forEach(function(hackathon) {
+            var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
+            +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
+           // console.log(hackathon.title + " is in " + hackathon.years);
+           let messagedata={
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements":[
+                            {
+                            "title":hackathon.title,
+                            "image_url":hackathon.url,
+                            "subtitle":description,
+                            "default_action": {
+                                "type": "web_url",
+                                "url": hackathon.url,
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": hackathon.facebookURL
+                                },
+                            "buttons":[
+                            { 
+                                "type":"web_url",
+                                "url":hackathon.url,
+                                "title":"View Their Website"
+                            }           
+                        ]      
+                    }
+                ]
+            }
+        }
+    }
+});
+        
+        sendMD(sender, messagedata);
+
+
+
+        }
+
+        // continue scanning if we have more movies, because
+        // scan can retrieve a maximum of 1MB of data
+        if (typeof data.LastEvaluatedKey != "undefined") {
+            console.log("Scanning for more...");
+            params.ExclusiveStartKey = data.LastEvaluatedKey;
+            docClient.scan(params, onScan);
+        }
+    });
+
+
+}
+
 
 function sendMD(sender, messageData){
     request({
