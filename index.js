@@ -38,10 +38,9 @@ app.post('/webhook/', function(req, res){
 		let text = event.message.text;
             text = text.toLowerCase();
             if(text == "help"){
-                // sendText(sender, "hello");
                 sendHelpList(sender);
             }else if(text == "hack month"){
-                getUpcomingHackathons(sender);
+                getThisMonthHack(sender);
             }else if( text == "upcoming hack"){
                 getUpcomingHackathons(sender);
             }else{
@@ -51,7 +50,7 @@ app.post('/webhook/', function(req, res){
             let text = JSON.stringify(event.postback.payload);
             console.log(text);
             if(text == "\"HackMonth\""){
-                getUpcomingHackathons(sender);
+                getThisMonthHack(sender);
             }else if(text == "\"UpcomingHack\""){
                 getUpcomingHackathons(sender);
             }
@@ -59,6 +58,8 @@ app.post('/webhook/', function(req, res){
     }
     res.sendStatus(200);
 });
+
+
 function getUpcomingHackathons(sender){
 
 var params = {
@@ -68,17 +69,24 @@ var params = {
     //     "title": title
     // }
 };
-
-
-
 docClient.scan(params, function (err, data){
-
  if (err) {
         console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
     } else {
         // print all the movies
         console.log("Scan succeeded.");
+        var d = new Date();
+        var n = d.getMonth();
+        var counter = 0;
+        var ob = {"January": 1, "Febuary": 2, "March": 3, "April": 4, "May": 5, "June": 6, "July": 7, "August": 8, "Sepetember": 9, "October": 10, "November": 11, "December": 12};
         data.Items.forEach(function(hackathon) {
+        var month = (hackathon.startDate.split(" "))[0];
+        if(n > ob.month){
+            continue;
+        }
+        if(counter > 5){
+            break;
+        }
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
@@ -90,36 +98,32 @@ docClient.scan(params, function (err, data){
                         "elements":[
                             {
                             "title":hackathon.title,
-                            // "image_url":hackathon.url,
+                            "image_url":hackathon.link,
                             "subtitle":description,
                             "default_action": {
                                 "type": "web_url",
-                                "url": "https://goo.gl/TU137",
+                                "url":  hackathon.link,
                                 "messenger_extensions": true,
                                 "webview_height_ratio": "tall",
                                 "fallback_url": hackathon.facebookURL
-                                }
-                            // "buttons":[
-                            // { 
-                            //     "type":"web_url",
-                            //     "url": hackathon.link,
-                            //     "title":"View Their Website"
-                            // }           
-                        // ]      
+                                },
+                            "buttons":[
+                            { 
+                                "type":"web_url",
+                                "url": hackathon.link,
+                                "title":"View Their Website"
+                            }           
+                        ]      
                     }
                 ]
             }
         }
     }
-            sendMD(sender, messagedata);
-
+            
+        sendMD(sender, messagedata);
+        counter++;
 });
-        
-
-
-
         }
-
         // continue scanning if we have more movies, because
         // scan can retrieve a maximum of 1MB of data
         if (typeof data.LastEvaluatedKey != "undefined") {
@@ -128,9 +132,75 @@ docClient.scan(params, function (err, data){
             docClient.scan(params, onScan);
         }
     });
-
-
 }
+
+function getThisMonthHack(sender){
+
+var params = {
+    TableName: 'Hackathons',
+    ProjectionExpression: "years, title",
+};
+docClient.scan(params, function (err, data){
+ if (err) {
+        console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        // print all the movies
+        console.log("Scan succeeded.");
+        var d = new Date();
+        var n = d.getMonth();
+        var counter = 0;
+        var ob = {"January": 1, "Febuary": 2, "March": 3, "April": 4, "May": 5, "June": 6, "July": 7, "August": 8, "Sepetember": 9, "October": 10, "November": 11, "December": 12};
+        data.Items.forEach(function(hackathon) {
+        var month = (hackathon.startDate.split(" "))[0];
+        if(n != ob.month){
+            continue;
+        }
+            var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
+            +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
+           // console.log(hackathon.title + " is in " + hackathon.years);
+           let messagedata={
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements":[
+                            {
+                            "title":hackathon.title,
+                            "image_url":hackathon.link,
+                            "subtitle":description,
+                            "default_action": {
+                                "type": "web_url",
+                                "url":  hackathon.link,
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "tall",
+                                "fallback_url": hackathon.facebookURL
+                                },
+                            "buttons":[
+                            { 
+                                "type":"web_url",
+                                "url": hackathon.link,
+                                "title":"View Their Website"
+                            }           
+                        ]      
+                    }
+                ]
+            }
+        }
+    }     
+        sendMD(sender, messagedata);
+});
+        }
+        // continue scanning if we have more movies, because
+        // scan can retrieve a maximum of 1MB of data
+        if (typeof data.LastEvaluatedKey != "undefined") {
+            console.log("Scanning for more...");
+            params.ExclusiveStartKey = data.LastEvaluatedKey;
+            docClient.scan(params, onScan);
+        }
+    });
+}
+
+
 
 
 function sendMD(sender, messageData){
