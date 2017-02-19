@@ -40,22 +40,20 @@ app.post('/webhook/', function(req, res){
             if(text == "help"){
                 // sendText(sender, "hello");
                 sendHelpList(sender);
-            }else if(text == "Hackathons in "){
+            }else if(text == "hack month"){
                 getUpcomingHackathons(sender);
-
             }else if( text == "upcoming hack"){
-
+                getUpcomingHackathons(sender);
             }else{
-
+                sendText(sender, "I didn't understand that please try again");
             }
 	    }else if(event.postback){
             let text = JSON.stringify(event.postback.payload);
             console.log(text);
             if(text == "\"HackMonth\""){
-                console.log("LMAO");
-                sendText(sender, "Here are your hacks for upcoming month");
+                getUpcomingHackathons(sender);
             }else if(text == "\"UpcomingHack\""){
-                sendText(sender, "Here are upcoming Hacks");
+                getUpcomingHackathons(sender);
             }
         }
     }
