@@ -102,7 +102,7 @@ docClient.scan(params, function (err, data){
                             "buttons":[
                             { 
                                 "type":"web_url",
-                                "url":hackathon.url,
+                                "url": hackathon.link,
                                 "title":"View Their Website"
                             }           
                         ]      
