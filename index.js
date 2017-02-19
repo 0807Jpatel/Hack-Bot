@@ -79,13 +79,15 @@ function sendMD(sender, messageData){
     })
 }
 
-function requestWebHook(){
+app.get('/updatedata', function(req, res){
+    requestWebHook();
+});
 
-    console.log("entered");
+function requestWebHook(){
     exec("./webhook.sh", function(err, stdout, stderr){
         console.log(err,stdout,stderr);
     });
-    console.log("ASdfasdfasdf");
+    console.log("updatedata");
 }
 
 function sendHelpList(sender){
