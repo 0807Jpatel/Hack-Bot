@@ -82,7 +82,7 @@ docClient.scan(params, function (err, data){
         data.Items.forEach(function(hackathon) {
         var month = (hackathon.startDate.split(" "))[0];
         if(n > ob.month){
-            continue;
+            return;
         }
         if(counter > 5){
             break;
@@ -153,7 +153,7 @@ docClient.scan(params, function (err, data){
         data.Items.forEach(function(hackathon) {
         var month = (hackathon.startDate.split(" "))[0];
         if(n != ob.month){
-            continue;
+            return;
         }
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
