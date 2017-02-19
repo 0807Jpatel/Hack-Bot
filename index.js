@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 var webshot = require('webshot');
-var phantomPath = require('phantomjs2');
+var phantomPath = require('phantomjs');
 AWS.config.loadFromPath('./config.json');
 
 var exec = require('child_process').exec;
