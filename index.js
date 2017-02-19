@@ -96,8 +96,11 @@ docClient.scan(params, function (err, data){
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
+            var options = {
+                phantomConfig: {'ignore-ssl-errors': 'true'}
+            }
            var image = 'image.jpg';
-           webshot(hackathon.link, 'image.jpg', function(err) {
+           webshot(hackathon.link, 'image.jpg',options, function(err) {
                 console.log("images saved");
             });
            let messagedata={
