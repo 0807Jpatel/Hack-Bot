@@ -64,8 +64,8 @@ function getUpcomingHackathons(sender){
 
 var params = {
     TableName: 'Hackathons',
-    ProjectionExpression: "years, title",
-    // Key:{
+    ProjectionExpression: "years, title, startDate, endDate, city, host, maxsize, travel, prize, highSchoolers,cost, facebookURL, twitterURL, googlePlusURL, notes"
+     // Key:{
     //     "title": title
     // }
 };
