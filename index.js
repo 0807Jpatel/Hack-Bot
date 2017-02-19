@@ -111,9 +111,10 @@ docClient.scan(params, function (err, data){
             }
         }
     }
+            sendMD(sender, messagedata);
+
 });
         
-        sendMD(sender, messagedata);
 
 
 
