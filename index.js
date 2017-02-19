@@ -81,16 +81,16 @@ docClient.scan(params, function (err, data){
         var ob = {"January": 1, "Febuary": 2, "March": 3, "April": 4, "May": 5, "June": 6, "July": 7, "August": 8, "Sepetember": 9, "October": 10, "November": 11, "December": 12};
         data.Items.forEach(function(hackathon) {
         console.log(hackathon.startDate);
-        if(hackathon.startDate != " " | hackathon.startDate != ""){
-            var month = (hackathon.startDate.split(" "))[0];
-            if(n != ob.month){
-                return;
-            }
-        }
+        // if(hackathon.startDate != " " | hackathon.startDate != ""){
+        //     var month = (hackathon.startDate.split(" "))[0];
+        //     if(n != ob.month){
+        //         return;
+        //     }
+        // }
 
-        if(counter > 5){
-            return;
-        }
+        // if(counter > 5){
+        //     return;
+        // }
             var description=hackathon.title+" is located in "+hackathon.city+". This hackathon starts "
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
