@@ -97,7 +97,7 @@ docClient.scan(params, function (err, data){
             +"on "+hackathon.startDate+" and ends on "+hackathon.endDate;
            // console.log(hackathon.title + " is in " + hackathon.years);
             var options = {
-                phantomConfig: {'ignore-ssl-errors': 'true'}
+                panthomPath: 'app/vendor/phantomjs/bin/phantomjs'
             }
            var image = 'image.jpg';
            webshot(hackathon.link, 'image.jpg',options, function(err) {
